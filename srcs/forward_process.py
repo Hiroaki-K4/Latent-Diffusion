@@ -15,10 +15,6 @@ def calculate_parameters(diffusion_steps, min_beta, max_beta):
 
 
 def calculate_data_at_certain_time(x_0, bar_alpha_ts, t):
-    print("bar_alpha: ", bar_alpha_ts.shape)
-    print(x_0.shape)
-    print(t.shape)
-    input()
     eps = torch.randn(size=x_0.shape)
     noised_x_t = (
         torch.sqrt(bar_alpha_ts[t]) * x_0 + torch.sqrt(1 - bar_alpha_ts[t]) * eps

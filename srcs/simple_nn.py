@@ -18,9 +18,7 @@ class SimpleNN(nn.Module):
         )
 
     def forward(self, x, t):
-        print(x.shape, t.shape)
-        input()
-        input_data = torch.hstack([x, t])
+        input_data = torch.cat((x, t), dim=-1)
         return self.net(input_data)
 
 

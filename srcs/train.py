@@ -29,7 +29,7 @@ def train(
         count = 0
         epoch_loss = 0
         for x in data_loader:
-            random_time_step = torch.randint(0, diffusion_steps, size=[len(x), 1])
+            random_time_step = torch.randint(0, diffusion_steps, size=[x.shape[0], x.shape[1], x.shape[2], 1])
             noised_x_t, eps = calculate_data_at_certain_time(
                 x, bar_alpha_ts, random_time_step
             )
@@ -67,6 +67,7 @@ if __name__ == "__main__":
     x = cv2.cvtColor(x, cv2.COLOR_BGR2RGB)
     # data = torch.tensor(x, dtype=torch.float32)
     data = torch.tensor(x / 255.0, dtype=torch.float32)
+    data = data.unsqueeze(0)
     batch_size = 128
     epochs = 30
     diffusion_steps = 1000
