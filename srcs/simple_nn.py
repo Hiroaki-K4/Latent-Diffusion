@@ -3,7 +3,7 @@ import torch.nn as nn
 
 
 class SimpleNN(nn.Module):
-    def __init__(self, input_dim=2, hidden_dim=64):
+    def __init__(self, input_dim=3, hidden_dim=64):
         super().__init__()
         self.net = nn.Sequential(
             nn.Linear(input_dim + 1, hidden_dim),
@@ -18,6 +18,8 @@ class SimpleNN(nn.Module):
         )
 
     def forward(self, x, t):
+        print(x.shape, t.shape)
+        input()
         input_data = torch.hstack([x, t])
         return self.net(input_data)
 
